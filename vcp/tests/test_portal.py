@@ -3,6 +3,8 @@
 
 from datetime import timedelta
 
+from odoo_test_helper import FakeModelLoader
+
 from odoo.fields import Date
 from odoo.tests import tagged
 
@@ -14,6 +16,13 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # Load fake order model
+        cls.loader = FakeModelLoader(cls.env, cls.__module__)
+        cls.loader.backup_registry()
+        from .models.vcp_platform import VCPPlatform
+
+        cls.loader.update_registry((VCPPlatform,))
+
         # be sure some expected values are set otherwise homepage may fail
         date = Date.today()
         date = date - timedelta(days=date.day)
@@ -32,6 +41,7 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
                 "name": "oca",
                 "short_description": "OCA",
                 "description": "OCA",
+                "kind": "dummy",
             }
         )
         repository = cls.env["vcp.repository"].create(

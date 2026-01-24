@@ -42,7 +42,7 @@ class VCPPlatform(models.Model):
     image_64 = fields.Image(
         max_width=64, max_height=64, store=True, related="image_1920", string="Image 64"
     )
-    kind = fields.Selection([])
+    kind = fields.Selection([], required=True)
     key_ids = fields.One2many(
         comodel_name="vcp.platform.key",
         inverse_name="platform_id",
