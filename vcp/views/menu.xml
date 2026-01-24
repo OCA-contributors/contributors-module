@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <menuitem
+        id="vcp_main_menu"
+        name="Virtual Control Platform"
+        sequence="16"
+        web_icon="vcp,static/description/icon.png"
+    />
+</odoo>

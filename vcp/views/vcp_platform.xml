@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="vcp_platform_form_view">
+        <field name="model">vcp.platform</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="update_information"
+                        type="object"
+                        string="Update Information"
+                        class="oe_highlight"
+                    />
+                </header>
+                <sheet>
+                    <div name="button_box" />
+                    <field
+                        name="image_1920"
+                        widget='image'
+                        class="oe_avatar"
+                        options='{"preview_image": "image_128"}'
+                    />
+                    <group>
+                        <field name="name" />
+                        <field name="kind" />
+                        <field name="short_description" />
+                        <field name="description" />
+                        <field name="update_interval_days" />
+                    </group>
+                    <notebook>
+                        <page string="Branches" name="branch">
+                            <field name="branch_ids" />
+                        </page>
+                        <page string="API Keys" name="keys" groups="base.group_system">
+                            <field name="key_ids">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="vcp_platform_search_view">
+        <field name="model">vcp.platform</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="description" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="vcp_platform_tree_view">
+        <field name="model">vcp.platform</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vcp_platform_act_window">
+        <field name="name">Platforms</field>
+        <field name="path">vcp-platforms</field>
+        <field name="res_model">vcp.platform</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="vcp_platform_menu">
+        <field name="name">Platforms</field>
+        <field name="parent_id" ref="vcp_main_menu" />
+        <field name="action" ref="vcp_platform_act_window" />
+        <field name="sequence" eval="1" />
+    </record>
+</odoo>

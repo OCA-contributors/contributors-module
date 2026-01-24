@@ -1,0 +1,11 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_vcp_platform,Access Platform,model_vcp_platform,base.group_user,1,0,0,0
+access_vcp_platform_portal,Access Platform from Portal,model_vcp_platform,base.group_portal,1,0,0,0
+manage_vcp_platform,Manage Platform,model_vcp_platform,base.group_system,1,1,1,0
+manage_vcp_platform_key,Manage Platform Keys,model_vcp_platform_key,base.group_system,1,1,1,1
+access_branch,Access Branch,model_vcp_branch,base.group_user,1,0,0,0
+access_repository,Access Repository,model_vcp_repository,base.group_user,1,0,0,0
+access_request,Access Pull Requests,model_vcp_request,base.group_user,1,0,0,0
+access_request_label,Access Pull Requests Labels,model_vcp_request_label,base.group_user,1,0,0,0
+access_review,Access Reviews,model_vcp_review,base.group_user,1,0,0,0
+access_comment,Access Comments,model_vcp_comment,base.group_user,1,0,0,0
