@@ -8,7 +8,8 @@ import github3
 import requests
 from pytz import UTC
 
-from odoo import fields, models
+from odoo import _, fields, models
+from odoo.exceptions import ValidationError
 
 
 class VcpPlatform(models.Model):
@@ -28,6 +29,10 @@ class VcpPlatform(models.Model):
     def _update_information_github(self):
         self.ensure_one()
         clients = self._get_github_clients()
+        if not clients:
+            raise ValidationError(
+                _("No github clients configured. Please enter at least an API Key.")
+            )
         org = clients[0].organization(self.name)
         self.short_description = org.name
         self.description = org.description
