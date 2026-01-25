@@ -60,8 +60,6 @@ class ResPartner(models.Model):
             )
 
     def _get_contributor_url(self):
-        if self.is_published and self.website_url:
-            return self.website_url
         return False
 
     def _get_contributors_name(self, kind, **kwargs):
