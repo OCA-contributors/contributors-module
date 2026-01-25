@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="partner_detail" inherit_id="website_partner.partner_detail">
+        <xpath expr="//*[@id='partner_name']" position="before">
+            <span class="col-lg-12 text-muted" t-if="partner.github_name">
+                <a
+                    t-attf-href="https://github.com/{{partner.github_name}}"
+                    target="_blank"
+                >
+                    <i class="fa fa-github fa-lg me-1" />
+                    <t t-esc="partner.github_name" />
+                </a>
+            </span>
+        </xpath>
+        <xpath expr="//div[@t-field='partner.website_description']" position="after">
+            <div t-if="partner.github_name" class="row mt-4 o_contributors_data">
+                <div class="col-6 col-md-2 mb-3 o_contributors_merged_requests">
+                    <h5>Merged Requests</h5>
+                    <span class="h3" t-esc="partner.vcp_merged_requests" />
+                </div>
+                <div class="col-6 col-md-2 mb-3 o_contributors_created_requests">
+                    <h5>Created Requests</h5>
+                    <span class="h3" t-esc="partner.vcp_created_requests" />
+                </div>
+                <div class="col-6 col-md-2 mb-3 o_contributors_comments">
+                    <h5>Comments</h5>
+                    <span class="h3" t-esc="partner.vcp_comments" />
+                </div>
+                <div class="col-6 col-md-2 mb-3 o_contributors_reviews">
+                    <h5>Reviews</h5>
+                    <span class="h3" t-esc="partner.vcp_reviews" />
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
