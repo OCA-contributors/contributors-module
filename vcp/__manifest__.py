@@ -8,11 +8,10 @@
     "license": "AGPL-3",
     "author": "Dixmit,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/version-control-platform",
-    "depends": ["portal"],
+    "depends": ["base"],
     "data": [
         "security/ir.model.access.csv",
         "data/ir_cron.xml",
-        "templates/templates.xml",
         "views/menu.xml",
         "views/vcp_comment.xml",
         "views/vcp_review.xml",
@@ -22,14 +21,4 @@
         "views/vcp_platform.xml",
     ],
     "demo": [],
-    "assets": {
-        "web.assets_frontend": [
-            "vcp/static/src/components/**/*.esm.js",
-            "vcp/static/src/components/**/*.xml",
-            "vcp/static/src/components/**/*.scss",
-        ],
-        "web.assets_tests": [
-            "vcp/static/tests/**/*",
-        ],
-    },
 }

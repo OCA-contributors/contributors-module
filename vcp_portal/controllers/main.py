@@ -25,7 +25,7 @@ class ContributorsController(CustomerPortal):
         if vcp is None:
             vcps = request.env["vcp.platform"].search([])
             return request.render(
-                "vcp.vcp_platforms_template",
+                "vcp_portal.vcp_platforms_template",
                 {"vcps": vcps, **values},
             )
         vcp_id = (
@@ -35,7 +35,7 @@ class ContributorsController(CustomerPortal):
             .id
         )
         return request.render(
-            "vcp.vcp_platform_template",
+            "vcp_portal.vcp_platform_template",
             {"vcp": vcp_id, **values},
         )
 
