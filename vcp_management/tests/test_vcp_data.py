@@ -44,9 +44,15 @@ class TestVcpPartner(TransactionCase):
                 "from_date": date,
             }
         )
+        cls.partner_org_01 = cls.env["res.partner"].create(
+            {
+                "name": "Dixmit",
+            }
+        )
         cls.partner_01 = cls.env["res.partner"].create(
             {
                 "name": "Enric Tobella",
+                "parent_id": cls.partner_org_01.id,
             }
         )
         user_01 = cls.env["vcp.user"].create(
@@ -70,9 +76,17 @@ class TestVcpPartner(TransactionCase):
                 "partner_id": cls.partner_02.id,
             }
         )
+
+        cls.partner_org_02 = cls.env["res.partner"].create(
+            {
+                "name": "ForgeFlow",
+            }
+        )
+
         cls.partner_03 = cls.env["res.partner"].create(
             {
                 "name": "Jordi Ballester",
+                "parent_id": cls.partner_org_02.id,
             }
         )
         user_03 = cls.env["vcp.user"].create(
@@ -84,22 +98,12 @@ class TestVcpPartner(TransactionCase):
             }
         )
 
-        cls.partner_org_01 = cls.env["res.partner"].create(
-            {
-                "name": "Dixmit",
-            }
-        )
         org_01 = cls.env["vcp.organization"].create(
             {
                 "name": "Dixmit",
                 "external_id": "dixmit",
                 "host_id": cls.host.id,
                 "partner_id": cls.partner_org_01.id,
-            }
-        )
-        cls.partner_org_02 = cls.env["res.partner"].create(
-            {
-                "name": "ForgeFlow",
             }
         )
         org_02 = cls.env["vcp.organization"].create(
@@ -163,6 +167,15 @@ class TestVcpPartner(TransactionCase):
                 "created_at": date,
             }
         )
+        cls.env["vcp.comment"].create(
+            {
+                "external_id": 2,
+                "body": "Test Comment From Jordi",
+                "request_id": pull_request_01.id,
+                "user_id": user_03.id,
+                "created_at": date,
+            }
+        )
 
     def test_partner_request_count(self):
         self.assertEqual(self.partner_01.vcp_comments, 1)
@@ -173,15 +186,17 @@ class TestVcpPartner(TransactionCase):
         self.assertEqual(self.partner_02.vcp_created_requests, 1)
         self.assertEqual(self.partner_02.vcp_merged_requests, 0)
         self.assertEqual(self.partner_02.vcp_reviews, 0)
-        self.assertEqual(self.partner_03.vcp_comments, 0)
+        self.assertEqual(self.partner_03.vcp_comments, 1)
         self.assertEqual(self.partner_03.vcp_created_requests, 1)
         self.assertEqual(self.partner_03.vcp_merged_requests, 0)
         self.assertEqual(self.partner_03.vcp_reviews, 0)
+
         self.assertEqual(self.partner_org_01.vcp_comments, 1)
         self.assertEqual(self.partner_org_01.vcp_created_requests, 2)
         self.assertEqual(self.partner_org_01.vcp_merged_requests, 1)
         self.assertEqual(self.partner_org_01.vcp_reviews, 1)
-        self.assertEqual(self.partner_org_02.vcp_comments, 0)
+
+        self.assertEqual(self.partner_org_02.vcp_comments, 1)
         self.assertEqual(self.partner_org_02.vcp_created_requests, 1)
         self.assertEqual(self.partner_org_02.vcp_merged_requests, 0)
         self.assertEqual(self.partner_org_02.vcp_reviews, 0)
